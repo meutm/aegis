@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8f4">
+    <title>MEU Aegis | Participant Wellbeing & Safety</title>
+    <link rel="icon" href="assets/meu-logo-black.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="MEU Aegis navigation">
+        <a class="brand" href="#overview" data-nav="overview" aria-label="MEU Aegis home">
+          <img src="assets/meu-logo-black.png" alt="Model European Union Timisoara logo">
+          <span>
+            <strong>MEU Aegis</strong>
+            <small>Participant care platform</small>
+          </span>
+        </a>
+
+        <nav class="nav-list" aria-label="Primary">
+          <button class="nav-item is-active" type="button" data-nav="overview">Command Center</button>
+          <button class="nav-item" type="button" data-nav="daily-pulse">Daily Pulse</button>
+          <button class="nav-item" type="button" data-nav="support-request">Safe Person Request</button>
+          <button class="nav-item" type="button" data-nav="confidential-report">Confidential Report</button>
+          <button class="nav-item" type="button" data-nav="practical-ticket">Practical Issue</button>
+          <button class="nav-item" type="button" data-nav="dashboard">Restricted Dashboard</button>
+        </nav>
+
+        <div class="sidebar-status">
+          <span class="status-dot" id="connectionDot"></span>
+          <span id="connectionText">Backend not connected</span>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Participant wellbeing, safe person and daily safety feedback</p>
+            <h1 id="viewTitle">Command Center</h1>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost-button" type="button" data-nav="support-request">Safe Person</button>
+            <button class="primary-button" type="button" data-nav="daily-pulse">Submit Daily Pulse</button>
+          </div>
+        </header>
+
+        <main>
+          <section class="view is-visible" id="view-overview" data-title="Command Center">
+            <div class="hero-grid">
+              <div class="hero-copy">
+                <p class="eyebrow">MEU Timisoara participant protection layer</p>
+                <h2>Structured care, daily prevention intelligence and restricted follow-up.</h2>
+                <p>
+                  Aegis gives participants a calm private entry point for end-of-day safety feedback,
+                  Safe Person support, confidential reports and practical issue routing during the event.
+                </p>
+                <div class="hero-actions">
+                  <button class="primary-button" type="button" data-nav="daily-pulse">Daily Pulse</button>
+                  <button class="secondary-button" type="button" data-nav="support-request">Talk to a Safe Person</button>
+                  <button class="ghost-button" type="button" data-nav="confidential-report">Report a concern</button>
+                </div>
+              </div>
+              <div class="hero-metrics" aria-label="Aegis operating principles">
+                <div>
+                  <strong>Daily</strong>
+                  <span>2-minute safety and wellbeing signal</span>
+                </div>
+                <div>
+                  <strong>Restricted</strong>
+                  <span>Safe Person review for sensitive data</span>
+                </div>
+                <div>
+                  <strong>Auditable</strong>
+                  <span>Case IDs, action history and Drive evidence vault</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="notice-panel">
+              <div>
+                <h3>Confidentiality notice</h3>
+                <p>
+                  Submissions are reviewed by the designated Safe Person team. Confidentiality may be limited
+                  when there is an immediate safety risk, serious policy concern or organizational duty to act.
+                  Good-faith reporting will not affect a participant's standing in the event.
+                </p>
+              </div>
+              <button class="secondary-button" type="button" data-nav="confidential-report">Open confidential form</button>
+            </div>
+
+            <div class="module-grid">
+              <article class="module-card">
+                <span>01</span>
+                <h3>Daily Safety & Wellbeing Pulse</h3>
+                <p>Captures safety climate, respect, inclusion, fatigue, stress and follow-up needs at the end of each activity day.</p>
+              </article>
+              <article class="module-card">
+                <span>02</span>
+                <h3>Safe Person Support</h3>
+                <p>Creates a restricted support request with urgency, preferred channel, consent boundary and case tracking.</p>
+              </article>
+              <article class="module-card">
+                <span>03</span>
+                <h3>Confidential Situation Report</h3>
+                <p>Routes sensitive concerns into a Safe Person case board and optional Drive evidence folder.</p>
+              </article>
+              <article class="module-card">
+                <span>04</span>
+                <h3>Practical Issue Routing</h3>
+                <p>Separates accommodation, food, transport, venue and accessibility issues from sensitive cases.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="view" id="view-daily-pulse" data-title="Daily Safety & Wellbeing Pulse">
+            <div class="section-heading">
+              <p class="eyebrow">Participant form</p>
+              <h2>End-of-day safety and wellbeing signal</h2>
+              <p>Designed to take about two minutes. Optional identity fields help the team follow up when you request contact.</p>
+            </div>
+
+            <form class="aegis-form" data-action="submitDailyPulse" autocomplete="on">
+              <div class="form-grid">
+                <label>
+                  Activity date
+                  <input type="date" name="activityDate" required>
+                </label>
+                <label>
+                  Participant code
+                  <input type="text" name="participantCode" placeholder="Optional">
+                </label>
+                <label>
+                  Name
+                  <input type="text" name="participantName" placeholder="Optional">
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" placeholder="Optional">
+                </label>
+                <label>
+                  Delegation / role
+                  <input type="text" name="delegation" placeholder="Optional">
+                </label>
+                <label>
+                  Contact phone
+                  <input type="tel" name="phone" placeholder="Optional">
+                </label>
+              </div>
+
+              <div class="scale-row" role="group" aria-labelledby="moodLabel">
+                <div>
+                  <h3 id="moodLabel">How are you feeling at the end of today?</h3>
+                  <p>1 means very low, 5 means very good.</p>
+                </div>
+                <div class="scale-options">
+                  <label><input type="radio" name="moodScore" value="1" required><span>1</span></label>
+                  <label><input type="radio" name="moodScore" value="2"><span>2</span></label>
+                  <label><input type="radio" name="moodScore" value="3"><span>3</span></label>
+                  <label><input type="radio" name="moodScore" value="4"><span>4</span></label>
+                  <label><input type="radio" name="moodScore" value="5"><span>5</span></label>
+                </div>
+              </div>
+
+              <div class="form-grid compact">
+                <label>
+                  Stress level today
+                  <select name="stressScore" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Very low</option>
+                    <option value="2">2 - Low</option>
+                    <option value="3">3 - Manageable</option>
+                    <option value="4">4 - High</option>
+                    <option value="5">5 - Very high</option>
+                  </select>
+                </label>
+                <label>
+                  Physical fatigue now
+                  <select name="fatigueScore" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Rested</option>
+                    <option value="2">2 - Slightly tired</option>
+                    <option value="3">3 - Tired but okay</option>
+                    <option value="4">4 - Very tired</option>
+                    <option value="5">5 - Exhausted</option>
+                  </select>
+                </label>
+                <label>
+                  Did you feel safe today?
+                  <select name="safetyFeeling" required>
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>Mostly</option>
+                    <option>No</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </label>
+                <label>
+                  Did you feel respected?
+                  <select name="respectFeeling" required>
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>Mostly</option>
+                    <option>No</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </label>
+                <label>
+                  Did you feel included?
+                  <select name="inclusionFeeling" required>
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>Mostly</option>
+                    <option>No</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </label>
+                <label>
+                  Did anything make you uncomfortable?
+                  <select name="discomfortToday" required>
+                    <option value="">Select</option>
+                    <option>No</option>
+                    <option>A little</option>
+                    <option>Yes</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </label>
+                <label>
+                  Do you know how to contact a Safe Person?
+                  <select name="safePersonAwareness" required>
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Not sure</option>
+                  </select>
+                </label>
+                <label>
+                  Were logistics acceptable today?
+                  <select name="logisticsRating" required>
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>Mostly</option>
+                    <option>No</option>
+                  </select>
+                </label>
+              </div>
+
+              <fieldset class="checkbox-panel">
+                <legend>Practical areas that need attention</legend>
+                <label><input type="checkbox" name="practicalIssues" value="Accommodation">Accommodation</label>
+                <label><input type="checkbox" name="practicalIssues" value="Food">Food</label>
+                <label><input type="checkbox" name="practicalIssues" value="Transport">Transport</label>
+                <label><input type="checkbox" name="practicalIssues" value="Venue">Venue</label>
+                <label><input type="checkbox" name="practicalIssues" value="Accessibility">Accessibility</label>
+                <label><input type="checkbox" name="practicalIssues" value="Schedule">Schedule</label>
+              </fieldset>
+
+              <div class="form-grid compact">
+                <label>
+                  Social activity safety
+                  <select name="socialSafety" required>
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>Mostly</option>
+                    <option>No</option>
+                    <option>Not applicable</option>
+                  </select>
+                </label>
+                <label>
+                  Pressure to drink, stay or participate
+                  <select name="pressureConcern" required>
+                    <option value="">Select</option>
+                    <option>No</option>
+                    <option>A little</option>
+                    <option>Yes</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </label>
+                <label>
+                  Return transport felt clear and safe
+                  <select name="transportReturn" required>
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>Mostly</option>
+                    <option>No</option>
+                    <option>Not applicable</option>
+                  </select>
+                </label>
+                <label>
+                  Safe Person follow-up
+                  <select name="contactRequest" required>
+                    <option value="">Select</option>
+                    <option>No</option>
+                    <option>Yes, today</option>
+                    <option>Yes, tomorrow</option>
+                    <option>Only if urgent</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                Anything the team should know before tomorrow?
+                <textarea name="openNote" rows="5" placeholder="Optional. You can keep this practical, confidential or simply human."></textarea>
+              </label>
+
+              <label class="consent-line">
+                <input type="checkbox" name="consent" value="Yes" required>
+                I understand who reviews this submission and the limits of confidentiality described above.
+              </label>
+
+              <div class="form-actions">
+                <button class="primary-button" type="submit">Submit daily pulse</button>
+                <button class="ghost-button" type="reset">Clear</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="view" id="view-support-request" data-title="Safe Person Support Request">
+            <div class="section-heading">
+              <p class="eyebrow">Restricted Safe Person workflow</p>
+              <h2>Ask to speak with someone trusted</h2>
+              <p>This creates a support request in the Safe Person queue with a case ID and follow-up status.</p>
+            </div>
+
+            <form class="aegis-form" data-action="submitSupportRequest" autocomplete="on">
+              <div class="form-grid">
+                <label>Name<input type="text" name="participantName" placeholder="Optional"></label>
+                <label>Participant code<input type="text" name="participantCode" placeholder="Optional"></label>
+                <label>Email<input type="email" name="email" placeholder="Optional"></label>
+                <label>Phone<input type="tel" name="phone" placeholder="Optional"></label>
+                <label>
+                  Urgency
+                  <select name="urgency" required>
+                    <option value="">Select</option>
+                    <option>Not urgent</option>
+                    <option>Today</option>
+                    <option>Immediate</option>
+                  </select>
+                </label>
+                <label>
+                  Preferred contact channel
+                  <select name="preferredChannel" required>
+                    <option value="">Select</option>
+                    <option>In person</option>
+                    <option>Phone</option>
+                    <option>WhatsApp</option>
+                    <option>Email</option>
+                    <option>Only if urgent</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                What would help right now?
+                <select name="desiredSupport" required>
+                  <option value="">Select</option>
+                  <option>Talk to someone</option>
+                  <option>Advice</option>
+                  <option>Mediation</option>
+                  <option>Separation from a situation</option>
+                  <option>Practical fix</option>
+                  <option>Formal action</option>
+                  <option>Unsure</option>
+                </select>
+              </label>
+
+              <label>
+                Consent boundary
+                <select name="consentBoundary" required>
+                  <option value="">Select</option>
+                  <option>Safe Person only</option>
+                  <option>Safe Person + HR if needed</option>
+                  <option>I want advice before escalation</option>
+                  <option>Escalate if urgent safety risk</option>
+                </select>
+              </label>
+
+              <label>
+                Message for the Safe Person team
+                <textarea name="message" rows="6" required placeholder="Tell us what you need, at the level of detail that feels safe for you."></textarea>
+              </label>
+
+              <label class="consent-line">
+                <input type="checkbox" name="consent" value="Yes" required>
+                I understand this request will be reviewed by the Safe Person team.
+              </label>
+
+              <div class="form-actions">
+                <button class="primary-button" type="submit">Request support</button>
+                <button class="ghost-button" type="reset">Clear</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="view" id="view-confidential-report" data-title="Confidential Situation Report">
+            <div class="section-heading">
+              <p class="eyebrow">Sensitive channel</p>
+              <h2>Report discomfort, conflict or unsafe behavior</h2>
+              <p>Attachments are optional. You do not need proof to ask for help or make the team aware of a concern.</p>
+            </div>
+
+            <form class="aegis-form" data-action="submitConfidentialReport" autocomplete="on">
+              <div class="form-grid">
+                <label>Name<input type="text" name="participantName" placeholder="Optional"></label>
+                <label>Participant code<input type="text" name="participantCode" placeholder="Optional"></label>
+                <label>Email<input type="email" name="email" placeholder="Optional"></label>
+                <label>Phone<input type="tel" name="phone" placeholder="Optional"></label>
+                <label>
+                  Report type
+                  <select name="reportType" required>
+                    <option value="">Select</option>
+                    <option>Wellbeing concern</option>
+                    <option>Conflict</option>
+                    <option>Harassment</option>
+                    <option>Discrimination</option>
+                    <option>Safety</option>
+                    <option>Medical</option>
+                    <option>Accommodation</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>
+                  Urgency
+                  <select name="urgency" required>
+                    <option value="">Select</option>
+                    <option>Not urgent</option>
+                    <option>Today</option>
+                    <option>Immediate</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                What happened?
+                <textarea name="narrative" rows="7" required placeholder="Describe the situation in your own words. You can leave out names or details you are not ready to share."></textarea>
+              </label>
+
+              <div class="form-grid compact">
+                <label>When did it happen?<input type="date" name="incidentDate"></label>
+                <label>Approximate time<input type="time" name="incidentTime"></label>
+                <label>Where did it happen?<input type="text" name="location" placeholder="Venue, accommodation, online, transport, other"></label>
+                <label>People involved<input type="text" name="peopleInvolved" placeholder="Optional"></label>
+                <label>
+                  Who can see this?
+                  <select name="visibility" required>
+                    <option value="">Select</option>
+                    <option>Safe Person only</option>
+                    <option>Safe Person + HR</option>
+                    <option>I want advice before escalation</option>
+                  </select>
+                </label>
+                <label>
+                  Desired next step
+                  <select name="desiredStep" required>
+                    <option value="">Select</option>
+                    <option>Talk only</option>
+                    <option>Advice</option>
+                    <option>Mediation</option>
+                    <option>Separation</option>
+                    <option>Formal action</option>
+                    <option>Practical fix</option>
+                    <option>Unsure</option>
+                  </select>
+                </label>
+                <label>
+                  Contact preference
+                  <select name="contactPreference" required>
+                    <option value="">Select</option>
+                    <option>Yes now</option>
+                    <option>Yes later</option>
+                    <option>Email only</option>
+                    <option>Not yet unless urgent</option>
+                  </select>
+                </label>
+                <label>
+                  Optional evidence
+                  <input type="file" name="evidence" multiple>
+                </label>
+              </div>
+
+              <label class="consent-line">
+                <input type="checkbox" name="consent" value="Yes" required>
+                I understand this report creates a restricted Safe Person case and may be escalated if immediate safety requires it.
+              </label>
+
+              <div class="form-actions">
+                <button class="primary-button" type="submit">Submit confidential report</button>
+                <button class="ghost-button" type="reset">Clear</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="view" id="view-practical-ticket" data-title="Practical Issue Ticket">
+            <div class="section-heading">
+              <p class="eyebrow">Operations routing</p>
+              <h2>Report a non-sensitive practical issue</h2>
+              <p>Use this for accommodation, meals, transport, venues, schedule, accessibility or materials.</p>
+            </div>
+
+            <form class="aegis-form" data-action="submitOperationalTicket" autocomplete="on">
+              <div class="form-grid">
+                <label>
+                  Category
+                  <select name="category" required>
+                    <option value="">Select</option>
+                    <option>Accommodation</option>
+                    <option>Food</option>
+                    <option>Transport</option>
+                    <option>Venue</option>
+                    <option>Accessibility</option>
+                    <option>Schedule</option>
+                    <option>Materials</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>
+                  Priority
+                  <select name="priority" required>
+                    <option value="">Select</option>
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                  </select>
+                </label>
+                <label>Location<input type="text" name="location" placeholder="Optional"></label>
+                <label>Participant code<input type="text" name="participantCode" placeholder="Optional"></label>
+                <label>Email<input type="email" name="email" placeholder="Optional"></label>
+                <label>Optional photo or file<input type="file" name="evidence" multiple></label>
+              </div>
+
+              <label>
+                What needs to be fixed?
+                <textarea name="description" rows="6" required></textarea>
+              </label>
+
+              <label class="consent-line">
+                <input type="checkbox" name="consent" value="Yes" required>
+                I understand this ticket may be routed to the relevant operations lead.
+              </label>
+
+              <div class="form-actions">
+                <button class="primary-button" type="submit">Submit practical issue</button>
+                <button class="ghost-button" type="reset">Clear</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="view" id="view-dashboard" data-title="Restricted Dashboard">
+            <div class="section-heading">
+              <p class="eyebrow">Safe Person and HR intelligence</p>
+              <h2>Daily prevention overview</h2>
+              <p>Requires the Safe Person password. Dashboard data is read from Google Sheets through the protected Apps Script endpoint.</p>
+            </div>
+
+            <div class="toolbar">
+              <label>
+                Safe Person password
+                <input type="password" id="dashboardPassword" placeholder="Enter dashboard password" autocomplete="current-password">
+              </label>
+              <button class="primary-button" type="button" id="loadDashboardButton">Load dashboard</button>
+              <button class="secondary-button" type="button" id="digestButton">Generate daily digest</button>
+            </div>
+
+            <div class="kpi-grid" id="kpiGrid">
+              <article class="kpi-card"><span>Responses today</span><strong>-</strong></article>
+              <article class="kpi-card"><span>Safety climate</span><strong>-</strong></article>
+              <article class="kpi-card"><span>Open high risk</span><strong>-</strong></article>
+              <article class="kpi-card"><span>Contact requests</span><strong>-</strong></article>
+            </div>
+
+            <div class="dashboard-grid">
+              <section class="dashboard-panel">
+                <h3>Daily trend</h3>
+                <div class="trend-list" id="trendList"></div>
+              </section>
+              <section class="dashboard-panel">
+                <h3>Open risk queue</h3>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Severity</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="riskTableBody">
+                      <tr><td colspan="4">Load dashboard to view restricted summary.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <section class="dashboard-panel">
+                <h3>Open cases</h3>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Case</th>
+                        <th>Type</th>
+                        <th>Severity</th>
+                        <th>Due</th>
+                      </tr>
+                    </thead>
+                    <tbody id="caseTableBody">
+                      <tr><td colspan="4">No data loaded.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <section class="dashboard-panel">
+                <h3>Operational pain points</h3>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Ticket</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ticketTableBody">
+                      <tr><td colspan="4">No data loaded.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </section>
+
+        </main>
+      </div>
+    </div>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
